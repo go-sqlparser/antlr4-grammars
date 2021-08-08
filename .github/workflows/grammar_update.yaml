@@ -1,0 +1,62 @@
+name: Update Grammar
+
+on:
+  push:
+#    branches: [ master ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  grammar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Download ANTLR
+        # https://www.antlr.org/download.html
+        # The latest version of ANTLR is 4.9.2, released March 11, 2021
+        working-directory: /tmp
+        run: |
+          echo "Started at $(date --utc -Iseconds)"
+          echo "today=$(date -I)" >> $GITHUB_ENV
+          wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
+
+      - name: Download grammar
+        env:
+          WD: tsql
+          FL: "TSqlLexer.g4 TSqlParser.g4"
+        run: |
+          set +x
+          cd "$WD"
+          for g in $FL; do echo $g;  
+            curl -sL "https://raw.githubusercontent.com/antlr/grammars-v4/master/sql/$WD/$g" > $g
+          done
+
+      - name: Update grammar
+        env:
+          WD: tsql
+          FL: "TSqlLexer.g4 TSqlParser.g4"
+        run: |
+          alias antlr='java -jar /tmp/antlr-4.9.2-complete.jar'
+          antlr
+          cd "$WD"
+          for g in $FL; do echo $g; antlr -Dlanguage=Go $g; done 
+#      - name: Commit changes
+#        run: |
+#          git add kin/grammar
+#          git status
+#          if [ "$(git status --porcelain)" ]; then
+#            git config --global user.email "actions@users.noreply.github.com"
+#            git config --global user.name "Grammar bot"
+#            git commit -m "Update grammar"
+#            git push
+#          fi
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: "- [#] updated grammar on ${{env.today}}"
