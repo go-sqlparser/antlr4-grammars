@@ -36,6 +36,7 @@ jobs:
           for g in $FL; do echo $g;  
             curl -sL "https://raw.githubusercontent.com/antlr/grammars-v4/master/sql/$WD/$g" > $g
           done
+          eval head $FL
 
       - name: Update grammar ${{ env.WD }}
         run: |
@@ -43,7 +44,7 @@ jobs:
           alias antlr='java -jar /tmp/antlr-4.9.2-complete.jar'
           antlr
           cd "$WD"
-          for g in $FL; do echo $g; antlr -Dlanguage=Go -package "$WD" $g; done 
+          for g in $FL; do echo $g; antlr -Dlanguage=Go -package "$WD" $g || head $g; done 
           # Setup grammer variables for next run
           echo "WD=sqlite" >> $GITHUB_ENV
           echo "FL='SQLiteLexer.g4 SQLiteParser.g4'" >> $GITHUB_ENV
