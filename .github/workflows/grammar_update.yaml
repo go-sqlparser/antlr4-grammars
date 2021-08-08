@@ -24,6 +24,9 @@ jobs:
         run: |
           echo "Started at $(date --utc -Iseconds)"
           echo "today=$(date -I)" >> $GITHUB_ENV
+          # Setup grammer variables first
+          echo "WD=tsql" >> $GITHUB_ENV
+          echo "FL='TSqlLexer.g4 TSqlParser.g4'" >> $GITHUB_ENV
           wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
 
       - name: Download grammar
@@ -37,16 +40,27 @@ jobs:
             curl -sL "https://raw.githubusercontent.com/antlr/grammars-v4/master/sql/$WD/$g" > $g
           done
 
-      - name: Update grammar
-        env:
-          WD: tsql
-          FL: "TSqlLexer.g4 TSqlParser.g4"
+      - name: Update grammar ${{ env.WD }}
         run: |
           shopt -s expand_aliases
+          alias antlr
           alias antlr='java -jar /tmp/antlr-4.9.2-complete.jar'
           antlr
           cd "$WD"
           for g in $FL; do echo $g; antlr -Dlanguage=Go -package "$WD" $g; done 
+          # Setup grammer variables for next run
+          echo "WD=sqlite" >> $GITHUB_ENV
+          echo "FL='SQLiteLexer.g4 SQLiteParser.g4'" >> $GITHUB_ENV
+
+      - name: Update grammar ${{ env.WD }}
+        run: |
+          shopt -s expand_aliases
+          alias antlr
+          alias antlr='java -jar /tmp/antlr-4.9.2-complete.jar'
+          antlr
+          cd "$WD"
+          for g in $FL; do echo $g; antlr -Dlanguage=Go -package "$WD" $g; done 
+
 #      - name: Commit changes
 #        run: |
 #          git add kin/grammar
