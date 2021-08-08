@@ -1,7 +1,6 @@
 // Code generated from TSqlParser.g4 by ANTLR 4.9.2. DO NOT EDIT.
 
-package parser // TSqlParser
-
+package tsql // TSqlParser
 import "github.com/antlr/antlr4/runtime/Go/antlr"
 
 // TSqlParserListener is a complete listener for a parse tree produced by TSqlParser.

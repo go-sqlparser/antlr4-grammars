@@ -1,6 +1,6 @@
 // Code generated from TSqlLexer.g4 by ANTLR 4.9.2. DO NOT EDIT.
 
-package parser
+package tsql
 
 import (
 	"fmt"
