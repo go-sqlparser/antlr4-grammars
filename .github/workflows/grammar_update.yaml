@@ -46,7 +46,7 @@ jobs:
           alias antlr='java -jar /tmp/antlr-4.9.2-complete.jar'
           antlr
           cd "$WD"
-          for g in $FL; do echo $g; antlr -Dlanguage=Go $g; done 
+          for g in $FL; do echo $g; antlr -Dlanguage=Go -package "$WD" $g; done 
 #      - name: Commit changes
 #        run: |
 #          git add kin/grammar
