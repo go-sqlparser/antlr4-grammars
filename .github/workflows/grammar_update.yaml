@@ -1,5 +1,8 @@
 name: Update Grammar
 
+env:
+  ANTLR: java -jar /tmp/antlr-4.9.2-complete.jar
+
 on:
   push:
 #    branches: [ master ]
@@ -40,11 +43,9 @@ jobs:
 
       - name: Update grammar ${{ env.WD }}
         run: |
-          shopt -s expand_aliases
-          alias antlr='java -jar /tmp/antlr-4.9.2-complete.jar'
-          antlr
+          $ANTLR
           cd "$WD"
-          for g in $FL; do echo $g; antlr -Dlanguage=Go -package "$WD" $g || head $g; done 
+          for g in $FL; do echo $g; $ANTLR -Dlanguage=Go -package "$WD" $g || head $g; done 
           # Setup grammer variables for next run
           echo "WD=sqlite" >> $GITHUB_ENV
           echo "FL=SQLiteLexer.g4 SQLiteParser.g4" >> $GITHUB_ENV
@@ -59,11 +60,24 @@ jobs:
 
       - name: Update grammar ${{ env.WD }}
         run: |
-          shopt -s expand_aliases
-          alias antlr || true
-          alias antlr='java -jar /tmp/antlr-4.9.2-complete.jar'
           cd "$WD"
-          for g in $FL; do echo $g; antlr -Dlanguage=Go -package "$WD" $g; done 
+          for g in $FL; do echo $g; $ANTLR -Dlanguage=Go -package "$WD" $g; done 
+          # Setup grammer variables for next run
+          echo "WD=plsql" >> $GITHUB_ENV
+          echo "FL=PlSqlLexer.g4 PlSqlParser.g4" >> $GITHUB_ENV
+
+      - name: Download grammar ${{ env.WD }}
+        run: |
+          set +x
+          cd "$WD"
+          for g in $FL; do echo $g;  
+            curl -sL "https://raw.githubusercontent.com/antlr/grammars-v4/master/sql/$WD/$g" > $g
+          done
+
+      - name: Update grammar ${{ env.WD }}
+        run: |
+          cd "$WD"
+          for g in $FL; do echo $g; $ANTLR -Dlanguage=Go -package "$WD" $g; done 
 
 #      - name: Commit changes
 #        run: |
