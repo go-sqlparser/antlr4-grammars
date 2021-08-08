@@ -42,6 +42,7 @@ jobs:
           WD: tsql
           FL: "TSqlLexer.g4 TSqlParser.g4"
         run: |
+          shopt -s expand_aliases
           alias antlr='java -jar /tmp/antlr-4.9.2-complete.jar'
           antlr
           cd "$WD"
