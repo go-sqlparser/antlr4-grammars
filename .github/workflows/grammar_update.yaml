@@ -1,7 +1,7 @@
 name: Update Grammar
 
 env:
-  ANTLR: java -jar /tmp/antlr-4.9.2-complete.jar
+  ANTLRF: antlr-4.9.2-complete.jar
 
 on:
   push:
@@ -30,7 +30,8 @@ jobs:
           # Setup grammer variables first
           echo "WD=tsql" >> $GITHUB_ENV
           echo "FL=TSqlLexer.g4 TSqlParser.g4" >> $GITHUB_ENV
-          wget https://www.antlr.org/download/antlr-4.9.2-complete.jar
+          wget https://www.antlr.org/download/$ANTLRF
+          echo "ANTLR=java -jar /tmp/$ANTLRF" >> $GITHUB_ENV
 
       - name: Download grammar ${{ env.WD }}
         run: |
