@@ -21,8 +21,8 @@
 package dot_test
 
 import (
-	"bramp.net/antlr4/dot"
-	"bramp.net/antlr4/internal"
+	"github.com/go-sqlparser/antlr4/dot"
+	"github.com/go-sqlparser/antlr4/internal"
 
 	"fmt"
 	"github.com/antlr/antlr4/runtime/Go/antlr"

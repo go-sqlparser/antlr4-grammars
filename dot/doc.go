@@ -12,4 +12,4 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package dot // import "bramp.net/antlr4/dot"
+package dot
