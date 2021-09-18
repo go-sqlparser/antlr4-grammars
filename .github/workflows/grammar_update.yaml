@@ -83,7 +83,7 @@ jobs:
           echo "WD=mysql" >> $GITHUB_ENV
           echo "FL=MySqlLexer.g4 MySqlParser.g4" >> $GITHUB_ENV
 
-      - name: Download grammar ${{ env.WD }} (special: mysql)
+      - name: Download grammar ${{ env.WD }} (!!!special!!! mysql)
         run: |
           set +x
           cd "$WD"
