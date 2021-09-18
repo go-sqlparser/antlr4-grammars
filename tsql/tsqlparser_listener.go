@@ -715,6 +715,15 @@ type TSqlParserListener interface {
 	// EnterCreate_index is called when entering the create_index production.
 	EnterCreate_index(c *Create_indexContext)
 
+	// EnterAlter_index is called when entering the alter_index production.
+	EnterAlter_index(c *Alter_indexContext)
+
+	// EnterCreate_columnstore_index is called when entering the create_columnstore_index production.
+	EnterCreate_columnstore_index(c *Create_columnstore_indexContext)
+
+	// EnterCreate_nonclustered_columnstore_index is called when entering the create_nonclustered_columnstore_index production.
+	EnterCreate_nonclustered_columnstore_index(c *Create_nonclustered_columnstore_indexContext)
+
 	// EnterCreate_xml_index is called when entering the create_xml_index production.
 	EnterCreate_xml_index(c *Create_xml_indexContext)
 
@@ -1093,6 +1102,9 @@ type TSqlParserListener interface {
 	// EnterShutdown_statement is called when entering the shutdown_statement production.
 	EnterShutdown_statement(c *Shutdown_statementContext)
 
+	// EnterCheckpoint_statement is called when entering the checkpoint_statement production.
+	EnterCheckpoint_statement(c *Checkpoint_statementContext)
+
 	// EnterDbcc_special is called when entering the dbcc_special production.
 	EnterDbcc_special(c *Dbcc_specialContext)
 
@@ -1167,6 +1179,9 @@ type TSqlParserListener interface {
 
 	// EnterSet_special is called when entering the set_special production.
 	EnterSet_special(c *Set_specialContext)
+
+	// EnterSpecial_list is called when entering the special_list production.
+	EnterSpecial_list(c *Special_listContext)
 
 	// EnterConstant_LOCAL_ID is called when entering the constant_LOCAL_ID production.
 	EnterConstant_LOCAL_ID(c *Constant_LOCAL_IDContext)
@@ -2404,6 +2419,15 @@ type TSqlParserListener interface {
 	// ExitCreate_index is called when exiting the create_index production.
 	ExitCreate_index(c *Create_indexContext)
 
+	// ExitAlter_index is called when exiting the alter_index production.
+	ExitAlter_index(c *Alter_indexContext)
+
+	// ExitCreate_columnstore_index is called when exiting the create_columnstore_index production.
+	ExitCreate_columnstore_index(c *Create_columnstore_indexContext)
+
+	// ExitCreate_nonclustered_columnstore_index is called when exiting the create_nonclustered_columnstore_index production.
+	ExitCreate_nonclustered_columnstore_index(c *Create_nonclustered_columnstore_indexContext)
+
 	// ExitCreate_xml_index is called when exiting the create_xml_index production.
 	ExitCreate_xml_index(c *Create_xml_indexContext)
 
@@ -2782,6 +2806,9 @@ type TSqlParserListener interface {
 	// ExitShutdown_statement is called when exiting the shutdown_statement production.
 	ExitShutdown_statement(c *Shutdown_statementContext)
 
+	// ExitCheckpoint_statement is called when exiting the checkpoint_statement production.
+	ExitCheckpoint_statement(c *Checkpoint_statementContext)
+
 	// ExitDbcc_special is called when exiting the dbcc_special production.
 	ExitDbcc_special(c *Dbcc_specialContext)
 
@@ -2856,6 +2883,9 @@ type TSqlParserListener interface {
 
 	// ExitSet_special is called when exiting the set_special production.
 	ExitSet_special(c *Set_specialContext)
+
+	// ExitSpecial_list is called when exiting the special_list production.
+	ExitSpecial_list(c *Special_listContext)
 
 	// ExitConstant_LOCAL_ID is called when exiting the constant_LOCAL_ID production.
 	ExitConstant_LOCAL_ID(c *Constant_LOCAL_IDContext)

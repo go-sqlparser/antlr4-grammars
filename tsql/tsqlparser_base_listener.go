@@ -1573,6 +1573,27 @@ func (s *BaseTSqlParserListener) EnterCreate_index(ctx *Create_indexContext) {}
 // ExitCreate_index is called when production create_index is exited.
 func (s *BaseTSqlParserListener) ExitCreate_index(ctx *Create_indexContext) {}
 
+// EnterAlter_index is called when production alter_index is entered.
+func (s *BaseTSqlParserListener) EnterAlter_index(ctx *Alter_indexContext) {}
+
+// ExitAlter_index is called when production alter_index is exited.
+func (s *BaseTSqlParserListener) ExitAlter_index(ctx *Alter_indexContext) {}
+
+// EnterCreate_columnstore_index is called when production create_columnstore_index is entered.
+func (s *BaseTSqlParserListener) EnterCreate_columnstore_index(ctx *Create_columnstore_indexContext) {
+}
+
+// ExitCreate_columnstore_index is called when production create_columnstore_index is exited.
+func (s *BaseTSqlParserListener) ExitCreate_columnstore_index(ctx *Create_columnstore_indexContext) {}
+
+// EnterCreate_nonclustered_columnstore_index is called when production create_nonclustered_columnstore_index is entered.
+func (s *BaseTSqlParserListener) EnterCreate_nonclustered_columnstore_index(ctx *Create_nonclustered_columnstore_indexContext) {
+}
+
+// ExitCreate_nonclustered_columnstore_index is called when production create_nonclustered_columnstore_index is exited.
+func (s *BaseTSqlParserListener) ExitCreate_nonclustered_columnstore_index(ctx *Create_nonclustered_columnstore_indexContext) {
+}
+
 // EnterCreate_xml_index is called when production create_xml_index is entered.
 func (s *BaseTSqlParserListener) EnterCreate_xml_index(ctx *Create_xml_indexContext) {}
 
@@ -2367,6 +2388,12 @@ func (s *BaseTSqlParserListener) EnterShutdown_statement(ctx *Shutdown_statement
 // ExitShutdown_statement is called when production shutdown_statement is exited.
 func (s *BaseTSqlParserListener) ExitShutdown_statement(ctx *Shutdown_statementContext) {}
 
+// EnterCheckpoint_statement is called when production checkpoint_statement is entered.
+func (s *BaseTSqlParserListener) EnterCheckpoint_statement(ctx *Checkpoint_statementContext) {}
+
+// ExitCheckpoint_statement is called when production checkpoint_statement is exited.
+func (s *BaseTSqlParserListener) ExitCheckpoint_statement(ctx *Checkpoint_statementContext) {}
+
 // EnterDbcc_special is called when production dbcc_special is entered.
 func (s *BaseTSqlParserListener) EnterDbcc_special(ctx *Dbcc_specialContext) {}
 
@@ -2526,6 +2553,12 @@ func (s *BaseTSqlParserListener) EnterSet_special(ctx *Set_specialContext) {}
 
 // ExitSet_special is called when production set_special is exited.
 func (s *BaseTSqlParserListener) ExitSet_special(ctx *Set_specialContext) {}
+
+// EnterSpecial_list is called when production special_list is entered.
+func (s *BaseTSqlParserListener) EnterSpecial_list(ctx *Special_listContext) {}
+
+// ExitSpecial_list is called when production special_list is exited.
+func (s *BaseTSqlParserListener) ExitSpecial_list(ctx *Special_listContext) {}
 
 // EnterConstant_LOCAL_ID is called when production constant_LOCAL_ID is entered.
 func (s *BaseTSqlParserListener) EnterConstant_LOCAL_ID(ctx *Constant_LOCAL_IDContext) {}
